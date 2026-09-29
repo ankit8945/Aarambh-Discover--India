@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+:root {
+  --font-heritage: 'Cinzel', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-royal: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-devanagari: 'Rozha One', serif;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #1c1917;
+  overflow-x: hidden;
+  max-width: 100vw;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Safe area padding utilities for notched devices & aspect ratios */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 1rem);
+}
+
+.font-heritage {
+  font-family: var(--font-heritage);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-royal {
+  font-family: var(--font-royal);
+}
+
+.font-devanagari {
+  font-family: var(--font-devanagari);
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.05);
+  }
+  80% {
+    opacity: 0.9;
+    transform: translateY(-160px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-240px) scale(0.9);
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 4.5s ease-out forwards;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body.print-landscape {
+    /* fallback rules */
+  }
+
+  /* Hide the main app root when printing */
+  body.printing #root {
+    display: none !important;
+  }
+  
+  /* Show only the cloned container and make sure everything is visible */
+  #print-clone-container {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+  
+  /* Prevent scrollbars from cutting off content in print */
+  #print-clone-container,
+  #print-clone-container * {
+    overflow: visible !important;
+  }
+  
+  /* Hide UI elements within the clone */
+  #print-clone-container .hide-on-print,
+  #print-clone-container button {
+    display: none !important;
+  }
+
+  /* Passport specific print layout - 2x2 grid */
+  body.print-passport #print-clone-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1cm;
+    align-items: start;
+  }
+
+  /* Make sure all hidden pages in passport become visible for print */
+  body.print-passport #print-clone-container .passport-page {
+    display: flex !important;
+    break-inside: avoid;
+    transform: none !important;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: 1px solid #e7e5e4 !important;
+    min-height: 12cm !important; /* Force a consistent height for printing */
+  }
+
+  /* Hide print-specific hidden elements in passport */
+  body.print-passport #print-clone-container .hide-on-print-passport {
+    display: none !important;
+  }
+
+  /* Make sure background colors print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Hide the print clone on screen displays to prevent UI leaks */
+@media screen {
+  #print-clone-container {
+    display: none !important;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 113, 108, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 113, 108, 0.45);
+}
+
+/* Google Translate CSS Overrides */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+#google_translate_element {
+  display: none !important;
+}
+.goog-tooltip {
+  display: none !important;
+}
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

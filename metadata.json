@@ -1,0 +1,12 @@
+{
+  "name": "AARAMBH — India's Living Memory Layer",
+  "description": "Discover India. Experience its heritage. Preserve what might disappear. Cultural Memory Graph, live geocoding, real routes, weather, and participatory memory preservation.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
