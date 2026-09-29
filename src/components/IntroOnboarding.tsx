@@ -288,7 +288,7 @@ export const IntroOnboarding: React.FC<IntroOnboardingProps> = ({ onComplete }) 
                 </span>
                 <span className="text-[9px] uppercase tracking-wider font-mono px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 font-bold flex items-center gap-1">
                   <Trophy className="w-3 h-3 text-amber-400" />
-                  <span>SIH 2026 WINNING PITCH</span>
+                  <span>SIH 2026</span>
                 </span>
               </div>
               <p className="text-[10px] text-stone-400 hidden sm:block">
@@ -409,7 +409,7 @@ export const IntroOnboarding: React.FC<IntroOnboardingProps> = ({ onComplete }) 
                     }`}
                   >
                     <Trophy className="w-3.5 h-3.5" />
-                    <span>🏆 SIH 2026 Winning Pitch</span>
+                    <span>🏆 SIH 2026 </span>
                   </button>
 
                   <button
@@ -462,7 +462,7 @@ export const IntroOnboarding: React.FC<IntroOnboardingProps> = ({ onComplete }) 
                 </div>
 
                 <div className="text-[11px] font-mono text-amber-400 hidden lg:block font-bold">
-                  SIH 2026 Grand Finale Dossier
+                  SIH 2026
                 </div>
               </div>
 
