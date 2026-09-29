@@ -50,7 +50,7 @@ async function callGeminiWithFallback(options: {
 
   const candidateModels = options.models || [
     'gemini-3.8-flash-lite',
-    'gemini-3.8git status-flash-lite'
+    'gemini-3.8-flash-lite'
   ];
 
   try {
