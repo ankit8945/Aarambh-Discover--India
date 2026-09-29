@@ -41,10 +41,8 @@ export const Footer: React.FC<FooterProps> = ({
   const { user, language, setLanguage } = useAuth();
   const langCode = (language || 'EN').substring(0, 2).toUpperCase();
 
-  // Modal to view saved trips
   const [showSavedTripsModal, setShowSavedTripsModal] = useState(false);
 
-  // Visited sites count / details
   const [visitedSitesCount, setVisitedSitesCount] = useState<number>(() => {
     try {
       const saved = localStorage.getItem('aarambh_visited_sites');
@@ -59,7 +57,6 @@ export const Footer: React.FC<FooterProps> = ({
     return 3;
   });
 
-  // Passport stamps count
   const [passportStampsCount, setPassportStampsCount] = useState<number>(() => {
     try {
       const saved = localStorage.getItem('aarambh_digital_passport');
@@ -84,6 +81,7 @@ export const Footer: React.FC<FooterProps> = ({
             if (v.length > 0) setVisitedSitesCount(v.length);
           }
         }
+
         const savedPassport = localStorage.getItem('aarambh_digital_passport');
         if (savedPassport) {
           const parsed = JSON.parse(savedPassport);
@@ -93,7 +91,9 @@ export const Footer: React.FC<FooterProps> = ({
         }
       } catch (e) {}
     };
+
     window.addEventListener('focus', checkCounts);
+
     return () => window.removeEventListener('focus', checkCounts);
   }, []);
 
@@ -112,10 +112,8 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <footer className="border-t border-stone-200/90 bg-[#FAF9F5] text-stone-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-8">
-        
-        {/* ============================================================ */}
-        {/* TOP BAR: BRAND + SLEEK SAVED TRIPS & HERITAGE SHORTCUTS */}
-        {/* ============================================================ */}
+
+        {/* TOP BAR */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 pb-6 border-b border-stone-200/80">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-3">
@@ -125,15 +123,15 @@ export const Footer: React.FC<FooterProps> = ({
                 National Living Heritage Archive
               </span>
             </div>
+
             <p className="text-xs text-stone-500 mt-1 max-w-md">
               {getTranslation('footerTagline', langCode) ||
                 'Preserving India’s living lore, sacred circuits, oral memories, and 42+ UNESCO heritage sites.'}
             </p>
           </div>
 
-          {/* Quick Access Action Pills (Saved Trips, Visited Sites, Passport) */}
           <div className="flex flex-wrap items-center gap-2.5">
-            {/* Primary Saved Trips Button */}
+
             <button
               id="footer-saved-trips-btn"
               onClick={handleOpenSavedTrips}
@@ -142,12 +140,12 @@ export const Footer: React.FC<FooterProps> = ({
             >
               <Bookmark className="w-4 h-4 text-stone-950 group-hover:scale-110 transition-transform" />
               <span>Saved Trips</span>
+
               <span className="px-2 py-0.5 rounded-full bg-stone-950 text-amber-300 font-mono text-[10px]">
                 {savedItinerary.length}
               </span>
             </button>
 
-            {/* Saved/Visited Sites Shortcut */}
             <button
               id="footer-saved-sites-btn"
               onClick={() => onTabChange('certificate')}
@@ -156,12 +154,12 @@ export const Footer: React.FC<FooterProps> = ({
             >
               <Landmark className="w-3.5 h-3.5 text-stone-500" />
               <span>Saved Sites</span>
+
               <span className="px-1.5 py-0.2 rounded-md bg-stone-100 text-stone-600 font-mono text-[10px]">
                 {visitedSitesCount}
               </span>
             </button>
 
-            {/* Digital Passport Stamps Shortcut */}
             <button
               id="footer-passport-btn"
               onClick={() => onTabChange('passport')}
@@ -170,12 +168,12 @@ export const Footer: React.FC<FooterProps> = ({
             >
               <Award className="w-3.5 h-3.5 text-amber-700" />
               <span>Passport</span>
+
               <span className="px-1.5 py-0.2 rounded-md bg-amber-50 text-amber-800 font-mono text-[10px]">
                 {passportStampsCount}
               </span>
             </button>
 
-            {/* Preserve Memory Action */}
             <button
               id="footer-preserve-memory-btn"
               onClick={onOpenSaveMemory}
@@ -184,19 +182,20 @@ export const Footer: React.FC<FooterProps> = ({
               <Camera className="w-3.5 h-3.5 text-amber-400" />
               <span>Contribute</span>
             </button>
+
           </div>
         </div>
 
-        {/* ============================================================ */}
-        {/* DIRECTORY LINKS (CLEAN, 4 COMPACT COLUMNS) */}
-        {/* ============================================================ */}
+        {/* DIRECTORY LINKS */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-xs">
-          {/* Col 1: Explore Monuments */}
+
+          {/* Heritage Discovery */}
           <div className="space-y-2.5">
             <h4 className="font-bold uppercase tracking-wider text-stone-900 text-[11px] flex items-center gap-1.5">
               <Landmark className="w-3.5 h-3.5 text-amber-700" />
               <span>Heritage Discovery</span>
             </h4>
+
             <ul className="space-y-1.5 text-stone-600">
               <li>
                 <button
@@ -207,6 +206,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>Heritage Scanner (Camera AI)</span>
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('explore')}
@@ -215,6 +215,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Sacred Cities & Trails
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('evisit')}
@@ -223,6 +224,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>🪔</span> 3D Darshan E-Visits
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('heritage')}
@@ -231,6 +233,7 @@ export const Footer: React.FC<FooterProps> = ({
                   42+ UNESCO & ASI Sites
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('maps')}
@@ -242,12 +245,13 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Col 2: Pilgrimage & Planner */}
+          {/* Journey Planning */}
           <div className="space-y-2.5">
             <h4 className="font-bold uppercase tracking-wider text-stone-900 text-[11px] flex items-center gap-1.5">
               <Compass className="w-3.5 h-3.5 text-amber-700" />
               <span>Journey Planning</span>
             </h4>
+
             <ul className="space-y-1.5 text-stone-600">
               <li>
                 <button
@@ -257,6 +261,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>🗺️</span> View Saved Trips ({savedItinerary.length})
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('plan-trip')}
@@ -265,6 +270,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Multi-Stop Route Planner
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('passport')}
@@ -273,6 +279,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Digital Yatra Passport
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('certificate')}
@@ -284,13 +291,15 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Col 3: Living Culture & Community */}
+          {/* Living Culture */}
           <div className="space-y-2.5">
             <h4 className="font-bold uppercase tracking-wider text-stone-900 text-[11px] flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-amber-700" />
               <span>Living Culture</span>
             </h4>
+
             <ul className="space-y-1.5 text-stone-600">
+
               <li>
                 <button
                   onClick={() => onTabChange('living-heritage')}
@@ -299,6 +308,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Living Craft Clusters
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('creator')}
@@ -307,6 +317,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Artisan Contributor Studio
                 </button>
               </li>
+
               <li>
                 <button
                   onClick={() => onTabChange('games-canvas')}
@@ -315,14 +326,17 @@ export const Footer: React.FC<FooterProps> = ({
                   Moksha Patam & Chaupar
                 </button>
               </li>
+
+              {/* MODERATION DESK + EMAILS */}
               <li>
                 <button
                   onClick={() => {
                     if (user?.role === 'ADMIN') {
                       onTabChange('admin');
                     } else {
-                      // Open the new AdminAuthModal
-                      document.dispatchEvent(new CustomEvent('open-admin-auth'));
+                      document.dispatchEvent(
+                        new CustomEvent('open-admin-auth')
+                      );
                     }
                   }}
                   className="hover:text-amber-900 transition-colors cursor-pointer flex items-center gap-1"
@@ -330,16 +344,34 @@ export const Footer: React.FC<FooterProps> = ({
                   <ShieldCheck className="w-3.5 h-3.5" />
                   Curator Moderation Desk
                 </button>
+
+                <div className="ml-5 mt-1.5 space-y-0.5">
+                  <a
+                    href="mailto:admin1@aarambh.in"
+                    className="block text-[10px] text-stone-500 hover:text-amber-900 transition-colors"
+                  >
+                    admin1@aarambh.in
+                  </a>
+
+                  <a
+                    href="mailto:admin2@aarambh.in"
+                    className="block text-[10px] text-stone-500 hover:text-amber-900 transition-colors"
+                  >
+                    admin2@aarambh.in
+                  </a>
+                </div>
               </li>
+
             </ul>
           </div>
 
-          {/* Col 4: Platform & Language */}
+          {/* Platform & Language */}
           <div className="space-y-2.5">
             <h4 className="font-bold uppercase tracking-wider text-stone-900 text-[11px] flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-amber-700" />
               <span>Languages & Walkthrough</span>
             </h4>
+
             <div className="flex flex-wrap gap-1 pt-0.5">
               {SUPPORTED_LANGUAGES.slice(0, 6).map((l) => (
                 <button
@@ -351,7 +383,8 @@ export const Footer: React.FC<FooterProps> = ({
                       : 'bg-white hover:bg-stone-200 text-stone-700 border border-stone-200'
                   }`}
                 >
-                  <span>{l.flag}</span> <span className="ml-0.5">{l.code}</span>
+                  <span>{l.flag}</span>
+                  <span className="ml-0.5">{l.code}</span>
                 </button>
               ))}
             </div>
@@ -364,22 +397,25 @@ export const Footer: React.FC<FooterProps> = ({
               <ChevronRight className="w-3 h-3" />
             </button>
           </div>
+
         </div>
 
-        {/* ============================================================ */}
-        {/* BOTTOM STRIP: CLEAN COPYRIGHT & TOP BUTTON */}
-        {/* ============================================================ */}
+        {/* BOTTOM STRIP */}
         <div className="pt-6 border-t border-stone-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500">
+
           <div className="flex items-center gap-2">
             <span>© 2026 AARAMBH • Living Heritage Archive</span>
             <span>•</span>
-            <span className="text-stone-400">Open Cultural Data Initiative</span>
+            <span className="text-stone-400">
+              Open Cultural Data Initiative
+            </span>
           </div>
 
           <div className="flex items-center gap-4">
             <span className="text-[11px] text-stone-400">
               Grounding: Archaeological Survey of India (ASI) & UNESCO
             </span>
+
             <button
               onClick={scrollToTop}
               className="p-1.5 rounded-lg text-stone-400 hover:text-stone-900 hover:bg-stone-200 transition-colors cursor-pointer"
@@ -388,49 +424,65 @@ export const Footer: React.FC<FooterProps> = ({
               <ArrowUp className="w-4 h-4" />
             </button>
           </div>
+
         </div>
 
       </div>
 
-      {/* ============================================================ */}
-      {/* SAVED TRIPS QUICK MODAL (FALLBACK IF DRAWER NOT PASSED) */}
-      {/* ============================================================ */}
+      {/* SAVED TRIPS MODAL */}
       {showSavedTripsModal && (
         <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in overflow-y-auto">
+
           <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col max-h-[85vh] my-8 shrink-0">
-            
+
             {/* Modal Header */}
             <div className="p-5 bg-gradient-to-r from-amber-50 to-stone-50 border-b border-stone-200 flex items-center justify-between">
+
               <div className="flex items-center gap-2.5">
+
                 <div className="w-9 h-9 rounded-xl bg-amber-500 text-stone-950 flex items-center justify-center font-bold">
                   <Bookmark className="w-5 h-5" />
                 </div>
+
                 <div>
                   <h3 className="text-base font-bold font-heritage text-stone-900">
                     My Saved Trips & Itinerary
                   </h3>
+
                   <p className="text-xs text-stone-500">
                     {savedItinerary.length} destinations bookmarked for your pilgrimage
                   </p>
                 </div>
+
               </div>
+
               <button
                 onClick={() => setShowSavedTripsModal(false)}
                 className="p-2 rounded-xl text-stone-400 hover:text-stone-800 hover:bg-stone-200/60 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
+
             </div>
 
-            {/* Modal Body: List of Saved Trips */}
+            {/* Modal Body */}
             <div className="p-5 overflow-y-auto space-y-3 flex-1">
+
               {savedItinerary.length === 0 ? (
+
                 <div className="py-12 text-center text-stone-500 space-y-3">
+
                   <Compass className="w-12 h-12 text-stone-300 mx-auto stroke-1" />
-                  <h4 className="text-sm font-bold text-stone-700">No saved trips yet</h4>
+
+                  <h4 className="text-sm font-bold text-stone-700">
+                    No saved trips yet
+                  </h4>
+
                   <p className="text-xs text-stone-500 max-w-xs mx-auto">
-                    While exploring 42+ UNESCO sites or sacred circuits, click "Add to Itinerary" to curate your journey.
+                    While exploring 42+ UNESCO sites or sacred circuits,
+                    click "Add to Itinerary" to curate your journey.
                   </p>
+
                   <button
                     onClick={() => {
                       setShowSavedTripsModal(false);
@@ -441,26 +493,37 @@ export const Footer: React.FC<FooterProps> = ({
                     <Compass className="w-3.5 h-3.5 text-amber-400" />
                     <span>Open Route Planner</span>
                   </button>
+
                 </div>
+
               ) : (
+
                 savedItinerary.map((item) => (
+
                   <div
                     key={item.id}
                     className="p-3.5 rounded-2xl bg-stone-50 hover:bg-amber-50/50 border border-stone-200/80 transition-all flex items-start justify-between gap-3 group"
                   >
+
                     <div className="min-w-0 flex-1">
+
                       <div className="flex items-center gap-2 mb-1">
+
                         <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold font-mono">
                           Day {item.day || 1}
                         </span>
+
                         <span className="text-xs text-stone-500 truncate flex items-center gap-1">
                           <MapPin className="w-3 h-3 text-amber-600 shrink-0" />
                           <span>{item.location}</span>
                         </span>
+
                       </div>
+
                       <h4 className="text-sm font-bold text-stone-900 truncate">
                         {item.title}
                       </h4>
+
                     </div>
 
                     {onRemoveItineraryItem && (
@@ -472,13 +535,18 @@ export const Footer: React.FC<FooterProps> = ({
                         <Trash2 className="w-4 h-4" />
                       </button>
                     )}
+
                   </div>
+
                 ))
+
               )}
+
             </div>
 
             {/* Modal Footer */}
             <div className="p-4 bg-stone-50 border-t border-stone-200 flex items-center justify-between gap-2">
+
               <button
                 onClick={() => {
                   setShowSavedTripsModal(false);
@@ -496,11 +564,14 @@ export const Footer: React.FC<FooterProps> = ({
               >
                 Close
               </button>
+
             </div>
 
           </div>
+
         </div>
       )}
+
     </footer>
   );
 };
